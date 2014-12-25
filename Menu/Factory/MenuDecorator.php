@@ -86,6 +86,11 @@ class MenuDecorator
         if ($options['icon']) {
             $item->setExtra('icon', $options['icon']);
         }
+		       
+        if ($options['parent'])
+        {
+            $item->setExtra('parent', $options['parent']);
+        }
     }
 
     /**
@@ -109,6 +114,7 @@ class MenuDecorator
             'pull-right' => false,
             'icon' => false,
             'divider' => false,
+			'parent' =>false,
         ), $options);
     }
 }
