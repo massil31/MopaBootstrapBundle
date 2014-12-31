@@ -1,5 +1,21 @@
 {% extends 'knp_menu.html.twig' %}
 
+
+{% block list %}
+{% if item.hasChildren and options.depth is not sameas(0) and item.displayChildren %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+    {% if item.extra('display') %}
+        <a href="#">
+            {{ block('label') }}
+        </a>
+    {% endif %}
+    <ul{{ knp_menu.attributes(listAttributes) }}>
+        {{ block('children') }}
+    </ul>
+{% endif %}
+{% endblock %}
+
+
 {% block linkElement %}
 {% spaceless %}
 {% import 'knp_menu.html.twig' as macros %}
@@ -17,8 +33,70 @@
 
 {% block label %}
     {% if options.allow_safe_labels and item.getExtra('safe_label', false) %}
-        <span class="menu-item-parent">{{ item.label|trans()|raw }}</span>
+        {% if item.extras.parent|default(false) %}
+            {% if item.extras.icon|default(false) %}
+                {{ mopa_bootstrap_icon(item.extras.icon, item.extras.icon_white|default(false)) }}{{ ' ' }}
+            {% endif %}
+            <span class="menu-item-parent">{{ item.label|trans()|raw }}</span>
+        {% else %}
+            {{ item.label|trans()|raw }}
+        {% endif %}
     {% else %}
-        <span class="menu-item-parent">{{ item.label|trans() }}</span>
+        {% if item.extras.parent|default(false) %}
+            {% if item.extras.icon|default(false) and item.children|length > 0 %}
+                {{ mopa_bootstrap_icon(item.extras.icon, item.extras.icon_white|default(false)) }}{{ ' ' }}
+            {% endif %}
+            <span class="menu-item-parent">{{ item.label|trans }}</span>
+        {% else %}
+            {{ item.label|trans }}
+        {% endif %}
     {% endif %}
 {% endblock %}
+
+{% block item %}
+{% if item.displayed %}
+{# building the class of the item #}
+    {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+    {%- if matcher.isCurrent(item) %}
+         {%- set classes = classes|merge([options.currentClass]) %} 
+    {%- elseif matcher.isAncestor(item, options.matchingDepth) %}
+        {%- set classes = classes|merge([options.ancestorClass]) %}
+    {%- endif %}
+    {%- if item.actsLikeFirst %}
+        {%- set classes = classes|merge([options.firstClass]) %}
+    {%- endif %}
+    {%- if item.actsLikeLast %}
+        {%- set classes = classes|merge([options.lastClass]) %}
+    {%- endif %}
+
+    {# Mark item as "leaf" (no children) or as "branch" (has children that are displayed) #}
+    {% if item.hasChildren and options.depth is not sameas(0) %}
+        {% if options.branch_class is not empty and item.displayChildren %}
+            {%- set classes = classes|merge([options.branch_class]) %}
+        {% endif %}
+    {% elseif options.leaf_class is not empty %}
+        {%- set classes = classes|merge([options.leaf_class]) %}
+    {%- endif %}
+
+    {%- set attributes = item.attributes %}
+    {%- if classes is not empty %}
+        {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+    {%- endif %}
+{# displaying the item #}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+    <li{{ knp_menu.attributes(attributes) }}>
+        {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
+        {{ block('linkElement') }}
+        {%- else %}
+        {{ block('spanElement') }}
+        {%- endif %}
+{# render the list of children#}
+        {%- set childrenClasses = item.childrenAttribute('class') is not empty ? [item.childrenAttribute('class')] : [] %}
+        
+        {%- set listAttributes = item.childrenAttributes|merge({'class': childrenClasses|join(' ') }) %}
+        {{ block('list') }}
+    </li>
+{% endif %}
+{% endblock %}
+
+{% block spanElement %}{% import 'knp_menu.html.twig' as knp_menu %}{{ knp_menu.attributes(item.labelAttributes) }}{% endblock %}

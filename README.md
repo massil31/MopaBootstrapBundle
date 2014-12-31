@@ -5,7 +5,7 @@ MopaBootstrapBundle is a collection of code to integrate twitter's bootstrap
 (http://twitter.github.com/bootstrap/) as easy as possible into your symfony2
 (http://www.symfony.com) Project.
 
-Check out the [Beta-4](https://github.com/phiamo/MopaBootstrapBundle/releases/tag/v3.0.0-beta4)
+The Bootstrap 3 support is now mainly working. Check out the [Beta-3](https://github.com/phiamo/MopaBootstrapBundle/releases/tag/v3.0.0-beta3)
 
 To use MopaBootstrapBundle and twitters Bootstrap 3 in your project add it via [composer](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/1-installation.md)
 
@@ -16,10 +16,9 @@ Recent BC breaks:
 
  * dc4fd12: [BC Break] Removed inline completely 
  * add75e9: Renamed config mopa_bootstrap.navbar to mopa_bootstrap.menu
- * eb9166f: Pass options in `mopa_bootstrap_render` to the menu provider (unlikely BC)
 
 
-BS3 (master branch of this bundle) is nearly stable see [Beta-4](https://github.com/phiamo/MopaBootstrapBundle/releases/tag/v3.0.0-beta4)
+BS3 (master branch of this bundle) is nearly stable see [Beta-3](https://github.com/phiamo/MopaBootstrapBundle/releases/tag/v3.0.0-beta3)
 BS2 (v2.3.x) is quite stable
 
 BC breaking changes will probably not be ported to 2.3. 
@@ -28,25 +27,13 @@ BC breaking changes will probably not be ported to 2.3.
 Branches
 --------
 
-To use this bundle with bootstrap 3 use the latest release:
+To use this bundle with bootstrap 3 use the master branch:
 
 ``` json
 {
     "require": {
-        "mopa/bootstrap-bundle": "v3.0.0-beta4",
-        "twbs/bootstrap": "v3.2.0"
-    }
-}
-```
-
-If you wish to use the current master branch, then use the following:
-
-
-``` json
-{
-    "require": {
-        "mopa/bootstrap-bundle": "dev-master",
-        "twbs/bootstrap": "dev-master"
+        "mopa/bootstrap-bundle": "v3.0.0-beta3",
+        "twbs/bootstrap": "v3.0.0"
     }
 }
 ```

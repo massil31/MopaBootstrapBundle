@@ -56,7 +56,7 @@ class MenuExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('mopa_bootstrap_menu', array($this, 'renderMenu'), array('is_safe' => array('html'))),
+            'mopa_bootstrap_menu' => new \Twig_Function_Method($this, 'renderMenu', array('is_safe' => array('html'))),
         );
     }
 
@@ -64,8 +64,8 @@ class MenuExtension extends \Twig_Extension
      * Renders the Menu with the specified renderer.
      *
      * @param \Knp\Menu\ItemInterface|string|array $menu
-     * @param array                                $options
-     * @param string                               $renderer
+     * @param array $options
+     * @param string $renderer
      *
      * @throws \InvalidArgumentException
      * @return string
@@ -89,7 +89,7 @@ class MenuExtension extends \Twig_Extension
                 $menu = array_shift($path);
             }
 
-            $menu = $this->helper->get($menu, $path, $options);
+            $menu = $this->helper->get($menu, $path);
         }
 
         $menu = $this->helper->get($menu, array(), $options);

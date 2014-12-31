@@ -83,7 +83,7 @@ class MenuConverter
             $childOptions = $this->decorator->buildOptions($autoChildOptions);
 
             $this->decorator->buildItem($child, $childOptions);
-            if (isset($options['autochilds']) && $options['autochilds']) {
+            if (isset($option['autochilds']) && $option['autochilds']) {
                 $this->convertChildren($child, $options);
             }
         }
@@ -101,11 +101,11 @@ class MenuConverter
     protected function getRootOptions(array $options)
     {
         if (!in_array($options["automenu"], $this->possibleNavs)) {
-            throw new \RuntimeException("Value 'automenu' is '".$options["automenu"]."' not one of ".implode("', '", $this->possibleNavs));
+            throw new \RuntimeException("Value 'automenu' is '" . $options["automenu"] . "' not one of " . implode("', '", $this->possibleNavs));
         }
 
         return array_merge($options, array(
-            $options["automenu"] => true, // navbar, pills etc => true
+            $options["automenu"] => true // navbar, pills etc => true
         ));
     }
 
@@ -120,9 +120,9 @@ class MenuConverter
     protected function getChildOptions(ItemInterface $item, array $options)
     {
         $childOptions = array();
-
+        
         $hasChildren = $item->hasChildren() && (!isset($options['depth']) || $options['depth'] > $item->getLevel());
-
+        
         if (in_array($options['automenu'], array('navbar')) && $hasChildren) {
             $childOptions = array(
                 'dropdown' => !isset($options['dropdown']) || $options['dropdown'],

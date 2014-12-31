@@ -31,7 +31,6 @@ class TabType extends AbstractType
         $resolver->setDefaults(array(
             'icon' => null,
             'error_icon' => 'remove-sign',
-            'disabled' => false,
         ));
     }
 
@@ -43,7 +42,6 @@ class TabType extends AbstractType
         $view->vars['valid'] = $valid = !$form->isSubmitted() || $form->isValid();
         $view->vars['icon'] = $valid ? $options['icon'] : $options['error_icon'];
         $view->vars['tab_active'] = false;
-        $view->vars['disabled'] = $options['disabled'];
 
         $view->parent->vars['tabbed'] = true;
     }

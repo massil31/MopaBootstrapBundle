@@ -72,7 +72,7 @@ If you are using Sass just include your.scss instead
 {% endstylesheets %}
 ```
 
-Depending on where your bundle exacly resides (e.g. Your\Smthbundle or Your\Bundle\SmthBundle)
+Depending on where you your bundle exacly resides (e.g. Your\Smthbundle or Your\Bundle\SmthBundle)
 you need to adapt the path ( ../ ):
 
 ``` css
@@ -103,7 +103,3 @@ make
 ```
 
 if it doesnt work, why not use the less or sass way?
-
----
-
-<< [Installation](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/1-installation.md) | [Form Extensions](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/3-form-extension-templates.md) >>

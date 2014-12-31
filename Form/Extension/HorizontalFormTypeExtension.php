@@ -60,8 +60,8 @@ class HorizontalFormTypeExtension extends AbstractTypeExtension
     {
         $isForm = false;
         if (!$view->parent && $options['compound'] && $view->vars['horizontal']) {
-            $class = isset($view->vars['attr']['class']) ? $view->vars['attr']['class'].' ' : '';
-            $view->vars['attr']['class'] = $class.'form-horizontal';
+            $class = isset($view->vars['attr']['class']) ? $view->vars['attr']['class'] . ' ' : '';
+            $view->vars['attr']['class'] = $class . 'form-horizontal';
 
             $isForm = true;
         }
@@ -82,7 +82,7 @@ class HorizontalFormTypeExtension extends AbstractTypeExtension
                 $child->vars['horizontal'] = $view->vars['horizontal'];
             }
 
-            if (count($view->children) > 0) {
+            if (count($view->children) > 0){
                 $this->setChildrenHorizontal($child);
             }
         }

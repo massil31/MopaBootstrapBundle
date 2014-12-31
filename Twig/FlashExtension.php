@@ -11,6 +11,8 @@
 
 namespace Mopa\Bundle\BootstrapBundle\Twig;
 
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * MopaBootstrap Flash Extension.
  *

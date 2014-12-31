@@ -36,7 +36,7 @@ class MenuDecorator
 
         if ($options['stacked']) {
             $class = $item->getChildrenAttribute('class');
-            $item->setChildrenAttribute('class', $class.' nav-stacked');
+            $item->setChildrenAttribute('class', $class . ' nav-stacked');
         }
 
         if ($options['dropdown-header']) {
@@ -80,13 +80,13 @@ class MenuDecorator
         if ($options['pull-right']) {
             $className = $options['navbar'] ? 'navbar-right' : 'pull-right';
             $class = $item->getChildrenAttribute('class', '');
-            $item->setChildrenAttribute('class', $class.' '.$className);
+            $item->setChildrenAttribute('class', $class . ' ' . $className);
         }
 
         if ($options['icon']) {
             $item->setExtra('icon', $options['icon']);
         }
-		       
+        
         if ($options['parent'])
         {
             $item->setExtra('parent', $options['parent']);
@@ -114,7 +114,7 @@ class MenuDecorator
             'pull-right' => false,
             'icon' => false,
             'divider' => false,
-			'parent' =>false,
+            'parent' =>false,
         ), $options);
     }
 }
